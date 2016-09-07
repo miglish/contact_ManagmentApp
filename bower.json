@@ -1,0 +1,29 @@
+{
+  "name": "contactManagment",
+  "version": "1.0.0",
+  "description": "Website for contact managment website",
+  "main": "index.html",
+  "moduleType": [],
+  "keywords": [
+    "contact",
+    "managment",
+    "crud"
+  ],
+  "authors": [
+    "Mkias"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "font-awesome": "~4.4.0",
+    "angular": "~1.4.7"
+  }
+}

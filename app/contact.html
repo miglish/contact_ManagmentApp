@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="contactApp">
+
+<head>
+     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head
+         content must come *after* these tags -->
+    <title>Contact Managment page</title>
+        <!-- Bootstrap -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="styles/mystyles.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <div class="container">
+      <div class="row row-content" ng-controller="ContactController">
+                      <div class="col-xs-12">
+                        <form class="form-inline">
+                          <div class="form-group">
+                            <label for="search">Search first name</label>
+                            <input ng-model="search.firstName" placeholder="first name">
+                          </div>
+                        </form>
+                      <div class="col-xs-6" id="area">
+                       <ul class="media-list">
+                        <li class="media" ng-repeat="contact in contacts | filter:search">
+                          <div class="media-left media-middle">
+                              <a href="#">
+                              <img class="media-object img-thumbnail"
+                               ng-src={{contact.image}} alt="portrait">
+                              </a>
+                          </div>
+                          <div class="media-body">
+                              <h5 class="media-heading">{{contact.firstName}}</h5>
+                              <h5 class="media-heading">{{contact.lastName}}</h5>
+                        </div>
+                        <div class="btn-group" role="group">
+                          <button type="button" class="btn btn-info btn-sm" ng-click="edit($index);">Edit</button>
+                          <button type="button" class="btn btn-danger btn-sm" ng-click="delete($index);">Delete</button>
+                        </div>
+                        </li>
+                    </ul>
+                  </div>
+                  <div class="col-xs-4">
+                    <form name="contactForm" novalidate>
+                      <h4>New contact/Edit contact</h4>
+                      <h7>Use the same form to create and edit contact</h7>
+
+                      <div class="form-group" ng-class="{ 'has-error' : contactForm.firstName.$invalid && !contactForm.name.$pristine }">
+                          <label>First Name</label>
+                          <input type="text" name="firstName" class="form-control" ng-model="contactObject.firstName" required>
+                          <p ng-show="contactForm.firstName.$invalid && !contactForm.firstName.$pristine" class="help-block">You name is required.</p>
+                      </div>
+                      <div class="form-group" ng-class="{ 'has-error' : contactForm.lastName.$invalid && !contactForm.name.$pristine }">
+                          <label>Last Name</label>
+                          <input type="text" name="lastName" class="form-control" ng-model="contactObject.lastName" required>
+                          <p ng-show="contactForm.firstName.$invalid && !contactForm.lastName.$pristine" class="help-block">You Last name is required.</p>
+                      </div>
+                      <div class="form-group" ng-class="{ 'has-error' : contactForm.image.$invalid && !contactForm.username.$pristine }">
+                          <label>Image</label>
+                          <input type="text" name="image" class="form-control" ng-model="contactObject.image" ng-minlength="6" ng-maxlength="30">
+                          <p ng-show="contactForm.image.$error.minlength" class="help-block">Image directory too short</p>
+                          <p ng-show="contactForm.image.$error.maxlength" class="help-block">Image directory too short</p>
+                      </div>
+                        <button type="submit" class="btn btn-primary" ng-click="save()">Create contact</button>
+
+                      </form>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="scripts/controller.js"></script>
+
+</body>
+
+</html>
